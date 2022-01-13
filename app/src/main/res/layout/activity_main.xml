@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.MainActivity">
+
+    <TextView
+        android:id="@+id/my_balancesTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/v_space"
+        android:layout_marginLeft="@dimen/v_space"
+        android:layout_marginTop="@dimen/v_space"
+        android:text="@string/my_balances"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <EditText
+        android:id="@+id/accountBalanceTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/v_space"
+        android:layout_marginTop="@dimen/v_space_large"
+        android:layout_marginEnd="@dimen/v_space"
+        android:text="1000"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:inputType="number"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/my_balancesTxt" />
+
+    <EditText
+        android:id="@+id/currencyTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/v_space_large"
+        android:layout_marginEnd="@dimen/v_space"
+        android:text="EUR"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@+id/accountBalanceTxt"
+        app:layout_constraintTop_toBottomOf="@+id/my_balancesTxt" />
+
+    <TextView
+        android:id="@+id/currency_exchangeTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/v_space"
+        android:layout_marginLeft="@dimen/v_space"
+        android:layout_marginTop="@dimen/v_space_large"
+        android:text="@string/currency_exchange"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/accountBalanceTxt"  />
+
+    <TextView
+        android:id="@+id/arrowDownImv"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/edittext_height"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/v_space"
+        android:layout_marginTop="@dimen/v_space"
+        android:drawableLeft="@drawable/arrow_up_bold_circle"
+        android:drawablePadding="20dip"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="@string/sell"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/currency_exchangeTxt" />
+
+    <EditText
+        android:id="@+id/amountEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/edittext_height"
+        android:layout_marginStart="@dimen/v_space"
+        android:layout_marginTop="@dimen/v_space"
+        android:ellipsize="start"
+        android:hint="@string/amount"
+        android:importantForAutofill="no"
+        android:inputType="numberDecimal"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/currency_exchangeTxt"
+        app:layout_constraintRight_toLeftOf="@id/sellCurrenciesSpinner"
+        tools:ignore="LabelFor" />
+
+    <Spinner
+        android:id="@+id/sellCurrenciesSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/edittext_height"
+        android:spinnerMode="dialog"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginEnd="@dimen/v_space"
+        android:layout_marginTop="@dimen/v_space"
+        app:layout_constraintTop_toBottomOf="@+id/currency_exchangeTxt"/>
+
+    <TextView
+        android:id="@+id/arrowUpImv"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/edittext_height"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/v_space"
+        android:layout_marginTop="@dimen/v_space"
+        android:drawableLeft="@drawable/arrow_down_bold_circle"
+        android:drawablePadding="20dip"
+        android:gravity="center"
+        android:singleLine="true"
+        android:text="@string/receive"
+        android:textSize="16sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/arrowDownImv" />
+
+    <EditText
+        android:id="@+id/receiveAmountEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/edittext_height"
+        android:layout_marginStart="@dimen/v_space"
+        android:layout_marginTop="@dimen/v_space"
+        android:ellipsize="start"
+        android:hint="@string/amount"
+        android:importantForAutofill="no"
+        android:inputType="numberDecimal"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/arrowDownImv"
+        app:layout_constraintRight_toLeftOf="@id/receiveCurrenciesSpinner"
+        tools:ignore="LabelFor" />
+
+    <Spinner
+        android:id="@+id/receiveCurrenciesSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/edittext_height"
+        android:spinnerMode="dialog"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginEnd="@dimen/v_space"
+        android:layout_marginTop="@dimen/v_space"
+        app:layout_constraintTop_toBottomOf="@+id/arrowDownImv"/>
+
+    <Button
+        android:id="@+id/btnConvert"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="@dimen/v_space"
+        android:layout_marginEnd="@dimen/v_space"
+        android:layout_marginBottom="@dimen/v_space"
+        android:background="@drawable/btn_main_round"
+        android:text="@string/submit"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/arrowUpImv"
+        app:layout_constraintVertical_bias="0.123" />
+
+    <ProgressBar
+        android:id="@+id/prgLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.479"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnConvert"
+        app:layout_constraintVertical_bias="0.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
