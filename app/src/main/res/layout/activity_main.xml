@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainLayout"
@@ -24,13 +23,15 @@
         android:id="@+id/accountBalanceTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/v_space"
+        android:layout_marginStart="@dimen/v_space_x_small"
         android:layout_marginTop="@dimen/v_space_large"
-        android:layout_marginEnd="@dimen/v_space"
-        android:text="1000"
-        android:textSize="24sp"
-        android:textStyle="bold"
+        android:layout_marginEnd="@dimen/v_space_x_small"
+        android:enabled="false"
         android:inputType="number"
+        android:text="1000"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/my_balancesTxt" />
 
@@ -39,12 +40,75 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/v_space_large"
-        android:layout_marginEnd="@dimen/v_space"
+        android:layout_marginEnd="@dimen/v_space_x_small"
+        android:enabled="false"
         android:text="EUR"
-        android:textSize="24sp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintLeft_toRightOf="@+id/accountBalanceTxt"
         app:layout_constraintTop_toBottomOf="@+id/my_balancesTxt" />
+
+    <EditText
+        android:id="@+id/accountBalanceUSDTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/v_space_x_small"
+        android:layout_marginTop="@dimen/v_space_large"
+        android:layout_marginEnd="@dimen/v_space_x_small"
+        android:enabled="false"
+        android:inputType="number"
+        android:text="0.00"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@+id/currencyTxt"
+        app:layout_constraintTop_toBottomOf="@+id/my_balancesTxt" />
+
+    <EditText
+        android:id="@+id/currencyUSDTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/v_space_large"
+        android:layout_marginEnd="@dimen/v_space_x_small"
+        android:enabled="false"
+        android:text="USD"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@+id/accountBalanceUSDTxt"
+        app:layout_constraintTop_toBottomOf="@+id/my_balancesTxt" />
+
+    <EditText
+        android:id="@+id/accountBalanceBGNTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/v_space_x_small"
+        android:layout_marginTop="@dimen/v_space_large"
+        android:layout_marginEnd="@dimen/v_space_x_small"
+        android:enabled="false"
+        android:inputType="number"
+        android:text="0.00"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@+id/currencyUSDTxt"
+        app:layout_constraintTop_toBottomOf="@+id/my_balancesTxt" />
+
+    <EditText
+        android:id="@+id/currencyBGNTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/v_space_large"
+        android:layout_marginEnd="@dimen/v_space_x_small"
+        android:enabled="false"
+        android:text="BGN"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toRightOf="@+id/accountBalanceBGNTxt"
+        app:layout_constraintTop_toBottomOf="@+id/my_balancesTxt" />
+
 
     <TextView
         android:id="@+id/currency_exchangeTxt"
@@ -55,7 +119,7 @@
         android:layout_marginTop="@dimen/v_space_large"
         android:text="@string/currency_exchange"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/accountBalanceTxt"  />
+        app:layout_constraintTop_toBottomOf="@+id/accountBalanceTxt" />
 
     <TextView
         android:id="@+id/arrowDownImv"
@@ -84,19 +148,19 @@
         android:importantForAutofill="no"
         android:inputType="numberDecimal"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@+id/currency_exchangeTxt"
         app:layout_constraintRight_toLeftOf="@id/sellCurrenciesSpinner"
+        app:layout_constraintTop_toBottomOf="@+id/currency_exchangeTxt"
         tools:ignore="LabelFor" />
 
     <Spinner
         android:id="@+id/sellCurrenciesSpinner"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/edittext_height"
+        android:layout_marginTop="@dimen/v_space"
+        android:layout_marginEnd="@dimen/v_space"
         android:spinnerMode="dialog"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginEnd="@dimen/v_space"
-        android:layout_marginTop="@dimen/v_space"
-        app:layout_constraintTop_toBottomOf="@+id/currency_exchangeTxt"/>
+        app:layout_constraintTop_toBottomOf="@+id/currency_exchangeTxt" />
 
     <TextView
         android:id="@+id/arrowUpImv"
@@ -125,19 +189,19 @@
         android:importantForAutofill="no"
         android:inputType="numberDecimal"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@+id/arrowDownImv"
         app:layout_constraintRight_toLeftOf="@id/receiveCurrenciesSpinner"
+        app:layout_constraintTop_toBottomOf="@+id/arrowDownImv"
         tools:ignore="LabelFor" />
 
     <Spinner
         android:id="@+id/receiveCurrenciesSpinner"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/edittext_height"
+        android:layout_marginTop="@dimen/v_space"
+        android:layout_marginEnd="@dimen/v_space"
         android:spinnerMode="dialog"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginEnd="@dimen/v_space"
-        android:layout_marginTop="@dimen/v_space"
-        app:layout_constraintTop_toBottomOf="@+id/arrowDownImv"/>
+        app:layout_constraintTop_toBottomOf="@+id/arrowDownImv" />
 
     <Button
         android:id="@+id/btnConvert"

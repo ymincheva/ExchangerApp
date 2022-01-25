@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity() {
     private val binding get() = _binding!!
 
     private val mainViewModel: MainViewModel by viewModels()
-    //private var totalCount: Int? = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,6 +65,18 @@ class MainActivity : AppCompatActivity() {
                     .withColor(ContextCompat.getColor(this, R.color.red))
                     .setTextColor(ContextCompat.getColor(this, R.color.white))
                     .show()
+            } else if (_binding?.sellCurrenciesSpinner?.selectedItem.toString()
+                    .equals(_binding?.receiveCurrenciesSpinner?.selectedItem.toString())
+            ) {
+                Snackbar.make(
+                    binding.mainLayout,
+                    "Same currency conversion should not be allowed.",
+                    Snackbar.LENGTH_LONG
+                )
+                    .withColor(ContextCompat.getColor(this, R.color.red))
+                    .setTextColor(ContextCompat.getColor(this, R.color.white))
+                    .show()
+
             }
             //check if internet is available
             else if (!Utility.isNetworkAvailable(this)) {
@@ -80,6 +91,8 @@ class MainActivity : AppCompatActivity() {
             } else {
                 doConversion()
             }
+            //hide keyboard
+            Utility.hideKeyboard(this)
         }
     }
 
@@ -117,20 +130,19 @@ class MainActivity : AppCompatActivity() {
                         val map: Map<String, Double>
                         map = result.data.rates
 
-                        val sellCurrenciesSpinner =
-                            findViewById<Spinner>(R.id.sellCurrenciesSpinner)
-                        val receiveCurrenciesSpinner =
-                            findViewById<Spinner>(R.id.receiveCurrenciesSpinner)
+                        val sellCurrenciesSpinner = _binding?.sellCurrenciesSpinner
+                        val receiveCurrenciesSpinner = _binding?.receiveCurrenciesSpinner
 
-                        val rate = map.getValue(receiveCurrenciesSpinner.selectedItem.toString())
+                        val rate = map.getValue(receiveCurrenciesSpinner?.selectedItem.toString())
                         var amount = binding.amountEditText.text.toString().toDouble()
                         var accountBalance = binding.accountBalanceTxt.text.toString().toDouble()
 
-                        if (!sellCurrenciesSpinner.selectedItem.toString().equals(Const.EUR)) {
+                        if (!sellCurrenciesSpinner?.selectedItem.toString().equals(Const.EUR)) {
                             val rateSell =
-                                map.getValue(sellCurrenciesSpinner.selectedItem.toString())
+                                map.getValue(sellCurrenciesSpinner?.selectedItem.toString())
                             amount = amount / rateSell
                         }
+
                         if (amount > accountBalance) {
                             Snackbar.make(
                                 binding.mainLayout,
@@ -142,6 +154,7 @@ class MainActivity : AppCompatActivity() {
                                 .show()
 
                             binding.amountEditText.text.clear()
+                            binding.receiveAmountEditText.text.clear()
                             binding.prgLoading.visibility = View.GONE
                             binding.btnConvert.visibility = View.VISIBLE
                             return@Observer
@@ -152,13 +165,58 @@ class MainActivity : AppCompatActivity() {
                         if (counter > Const.COUNTER) commission_fee = Const.COMMISSION_FEE
 
                         val formattedString =
-                            String.format("%,.2f", (amount * rate!! - commission_fee))
+                            String.format("%.2f", (amount * rate!! - commission_fee))
 
                         binding.receiveAmountEditText.setText(formattedString)
+                        var receiveCurrencies = receiveCurrenciesSpinner?.selectedItem.toString()
+                        when (receiveCurrencies) {
+                            "USD" -> {
+                                binding.accountBalanceTxt.setText(
+                                    String.format(
+                                        "%.2f",
+                                        binding.accountBalanceTxt.text.toString()
+                                            .toDouble() - (amount * rate!! - commission_fee)
+                                    )
+                                )
+                                binding.accountBalanceUSDTxt.setText(
+                                    String.format(
+                                        "%.2f",
+                                        binding.accountBalanceUSDTxt.text.toString()
+                                            .toDouble() + (amount * rate!! - commission_fee)
+                                    )
+                                )
+                            }
+                            "BGN" -> {
+                                binding.accountBalanceTxt.setText(
+                                    String.format(
+                                        "%.2f",
+                                        binding.accountBalanceTxt.text.toString()
+                                            .toDouble() - (amount * rate!! - commission_fee)
+                                    )
+                                )
+                                binding.accountBalanceBGNTxt.setText(
+                                    String.format(
+                                        "%.2f",
+                                        binding.accountBalanceBGNTxt.text.toString()
+                                            .toDouble() + (amount * rate!! - commission_fee)
+                                    )
+                                )
+                            }
+                            "EUR" -> binding.accountBalanceTxt.setText(
+                                String.format(
+                                    "%.2f",
+                                    binding.accountBalanceTxt.text.toString()
+                                        .toDouble() + (amount * rate!! - commission_fee)
+                                )
+                            )
+                            else -> {
+
+                            }
+                        }
 
                         infoDialog(
                             binding.amountEditText.text.toString().toDouble(),
-                            String.format("%,.2f", (amount * rate!!)).toDouble(),
+                            String.format("%.2f", (amount * rate!!)).toDouble(),
                             commission_fee
                         )
                         binding.prgLoading.visibility = View.GONE

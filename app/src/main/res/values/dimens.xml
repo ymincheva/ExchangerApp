@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="v_space_x_small">10dp</dimen>
+    <dimen name="v_space_x_small">4dp</dimen>
     <dimen name="v_space">20dp</dimen>
     <dimen name="v_space_large">30dp</dimen>
 
